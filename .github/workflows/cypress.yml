@@ -1,16 +1,17 @@
 name: Run Cypress Tests
 
-on: [push]
+on:
+  workflow_dispatch:
 
 jobs:
   cypress-run:
-    runs-on: windows-latest   # or ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: cypress-io/github-action@v6
         with:
-          record: true   # 👈 enables Cypress Cloud
+          record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
