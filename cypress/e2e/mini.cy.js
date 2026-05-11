@@ -26,4 +26,16 @@ describe('Basic Cypress Tests with UI', () => {
     cy.screenshot('after-click')
   })
 
+  it('Test 6 - flaky test example', () => {
+
+    cy.visit('https://example.cypress.io')
+
+    const random = Math.random()
+
+    cy.log('Random value: ' + random)
+
+    expect(random).to.be.greaterThan(0.5)
+
+  })
+
 })
