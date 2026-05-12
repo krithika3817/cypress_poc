@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.059" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-05-12T13:16:24" tests="0" file="cypress\e2e\basic.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Basic Tests" timestamp="2026-05-12T13:16:24" tests="1" time="0.057" failures="0">
+    <testcase name="Basic Tests KAN-8 simple assertion" time="0.021" classname="KAN-8 simple assertion">
+    </testcase>
+  </testsuite>
+</testsuites>

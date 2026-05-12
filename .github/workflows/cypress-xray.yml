@@ -1,0 +1,37 @@
+name: Cypress Xray Integration
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        run: npx cypress run
+
+      - name: Get Xray Token
+        id: xray-auth
+        run: |
+          TOKEN=$(curl -H "Content-Type: application/json" \
+          -X POST \
+          --data '{"client_id":"${{ secrets.XRAY_CLIENT_ID }}","client_secret":"${{ secrets.XRAY_CLIENT_SECRET }}"}' \
+          https://eu.xray.cloud.getxray.app/api/v2/authenticate)
+
+          echo "TOKEN=$TOKEN" >> $GITHUB_ENV
+
+      - name: Upload results to Xray
+        run: |
+          curl -H "Content-Type: text/xml" \
+          -H "Authorization: Bearer $TOKEN" \
+          --data @results/results.xml \
+          "https://eu.xray.cloud.getxray.app/api/v2/import/execution/junit?testExecKey=KAN-5"
